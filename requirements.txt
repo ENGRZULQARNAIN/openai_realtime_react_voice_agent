@@ -2,4 +2,6 @@ langchain-community
 langgraph
 starlette
 uvicorn[standard]
-fastapi
+fastapi[standard]
+tavily-python
+

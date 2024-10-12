@@ -12,7 +12,6 @@ app = FastAPI()
 
 # Mount static files from the "static" directory
 app.mount("/static", StaticFiles(directory="static"), name="static")
-
 # Enable CORS if needed
 app.add_middleware(
     CORSMiddleware,
@@ -44,6 +43,5 @@ async def homepage():
         html = f.read()
     return HTMLResponse(html)
 
-# Run the application
 if __name__ == "__main__":
-    uvicorn.run("app:app", host="0.0.0.0", port=3000, reload=True)
+    uvicorn.run(app, host="0.0.0.0", port=3000)
