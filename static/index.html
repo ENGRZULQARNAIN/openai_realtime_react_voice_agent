@@ -42,7 +42,9 @@
 
             async init(sampleRate) {
                 const audioContext = new AudioContext({ sampleRate });
-                await audioContext.audioWorklet.addModule("./audio-playback-worklet.js");
+
+                audioContext.audioWorklet.addModule("audio-playback-worklet.js");
+                console.log(audioFile)
 
                 this.playbackNode = new AudioWorkletNode(audioContext, "audio-playback-worklet");
                 this.playbackNode.connect(audioContext.destination);
@@ -80,7 +82,7 @@
                     this.audioContext = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 24000 });
                     console.log('1')
 
-                    await this.audioContext.audioWorklet.addModule("./audio-processor-worklet.js");
+                    await this.audioContext.audioWorklet.addModule("audio-processor-worklet.js");
                     console.log('2')
 
                     this.mediaStream = stream;
@@ -124,7 +126,8 @@
             try {
 
                 // handle output -> speaker stuff
-                const ws = new WebSocket("ws://localhost:3000/ws");
+                // http://127.0.0.1:8000/
+                const ws = new WebSocket("ws://127.0.0.1:8000/ws");
 
                 const audioPlayer = new Player();
                 audioPlayer.init(24000);
